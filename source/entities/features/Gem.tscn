@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://draiwgl1sdow2"]
+
+[ext_resource type="Script" path="res://source/entities/features/gem.gd" id="1_ivmen"]
+[ext_resource type="Texture2D" uid="uid://d2i66cbq5a02u" path="res://assets/textures/tiles.png" id="1_p4lx0"]
+[ext_resource type="Texture2D" uid="uid://curmqaeqbbv75" path="res://assets/textures/particles/pink_sparkle0.png" id="2_qwqbn"]
+[ext_resource type="Texture2D" uid="uid://2k1mwxr0s7mc" path="res://assets/textures/particles/pink_sparkle1.png" id="3_b4jly"]
+
+[sub_resource type="Animation" id="2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GemSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="1"]
+resource_name = "collect_bounce"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GemSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3.72529e-09, 3.72529e-09), Vector2(0, -16), Vector2(0, -32), Vector2(0, -24), Vector2(0, -8), Vector2(0, -8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x084i"]
+_data = {
+"RESET": SubResource("2"),
+"collect_bounce": SubResource("1")
+}
+
+[node name="Gem0" type="Area2D"]
+texture_filter = 1
+collision_layer = 0
+script = ExtResource("1_ivmen")
+
+[node name="GemSprite" type="Sprite2D" parent="."]
+scale = Vector2(7.98828, 7.98828)
+texture = ExtResource("1_p4lx0")
+region_enabled = true
+region_rect = Rect2(88, 32, 8, 8)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x084i")
+}
+autoplay = "RESET"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-16, -24, -8, -24, -8, -32, 8, -32, 8, -24, 16, -24, 16, 24, 8, 24, 8, 32, -8, 32, -8, 24, -16, 24)
+
+[node name="Large" type="CPUParticles2D" parent="."]
+position = Vector2(0, -8)
+amount = 3
+lifetime = 2.0
+lifetime_randomness = 0.01
+texture = ExtResource("2_qwqbn")
+emission_shape = 1
+emission_sphere_radius = 19.18
+direction = Vector2(90, 90)
+gravity = Vector2(0, 3)
+
+[node name="Small" type="CPUParticles2D" parent="."]
+amount = 6
+lifetime = 2.0
+lifetime_randomness = 0.01
+texture = ExtResource("3_b4jly")
+emission_shape = 1
+emission_sphere_radius = 36.47
+direction = Vector2(90, 90)
+gravity = Vector2(0, 5)
+
+[connection signal="body_entered" from="." to="." method="_on_Gem1_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

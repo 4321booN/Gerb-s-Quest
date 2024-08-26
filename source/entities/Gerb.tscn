@@ -1,0 +1,195 @@
+[gd_scene load_steps=18 format=3 uid="uid://eweq80phhjvr"]
+
+[ext_resource type="Script" path="res://source/entities/gerb.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://g20lx5umu2yt" path="res://assets/textures/player/spell_spritesheet.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://ccqjcf1munr8c" path="res://assets/textures/player/gerb_spritesheet.png" id="3_e8ex4"]
+[ext_resource type="Texture2D" uid="uid://iftxxggh8vab" path="res://assets/textures/player/staff.png" id="6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sqcg"]
+atlas = ExtResource("3_e8ex4")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htcar"]
+atlas = ExtResource("3_e8ex4")
+region = Rect2(16, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6khe"]
+atlas = ExtResource("3_e8ex4")
+region = Rect2(8, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfaii"]
+atlas = ExtResource("3_e8ex4")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl5mj"]
+atlas = ExtResource("3_e8ex4")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpbc5"]
+atlas = ExtResource("3_e8ex4")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euvl3"]
+atlas = ExtResource("3_e8ex4")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ecx1e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sqcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htcar")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6khe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfaii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl5mj")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpbc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euvl3")
+}],
+"loop": true,
+"name": &"walk_staff",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 64)
+
+[sub_resource type="Animation" id="4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealAura:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1e+06),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="2"]
+resource_name = "heal_spell"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealAura:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfvxs"]
+_data = {
+"RESET": SubResource("4"),
+"heal_spell": SubResource("2")
+}
+
+[sub_resource type="SpriteFrames" id="5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6")
+}],
+"loop": true,
+"name": &"Blast",
+"speed": 5.0
+}]
+
+[node name="Gerb" type="CharacterBody2D"]
+z_index = 2
+texture_filter = 1
+script = ExtResource("2")
+
+[node name="HealAura" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(8, 8)
+texture = ExtResource("3")
+region_enabled = true
+region_rect = Rect2(24, 12, 8, 12)
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_ecx1e")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="LadderChecker" type="Area2D" parent="."]
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderChecker"]
+shape = SubResource("1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -24)
+scale = Vector2(0.96875, 0.96875)
+polygon = PackedVector2Array(-16.5161, 3.8147e-06, -13.4194, -5.16129, -8.25807, -7.22581, 8.25807, -7.22581, 13.4194, -5.16129, 16.5161, 3.8147e-06, 16.5161, 16.5161, 16.5161, 44.3871, 13.4194, 50.5807, 8.25807, 56.7742, 0, 57.8065, -8.25807, 56.7742, -13.4194, 50.5807, -16.5161, 44.3871, -16.5161, 16.5161)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yfvxs")
+}
+autoplay = "RESET"
+
+[node name="Staff" type="Node2D" parent="."]
+visible = false
+position = Vector2(24, 12)
+
+[node name="StaffSprite" type="AnimatedSprite2D" parent="Staff"]
+position = Vector2(8, -12)
+scale = Vector2(8, 8)
+sprite_frames = SubResource("5")
+animation = &"Blast"
+
+[node name="Begin" type="Sprite2D" parent="Staff/StaffSprite"]
+position = Vector2(0, -2)
+texture = ExtResource("3")
+region_enabled = true
+region_rect = Rect2(28, 0, 4, 4)
+
+[node name="Beam" type="Sprite2D" parent="Staff/StaffSprite/Begin"]
+position = Vector2(0, -2)
+texture = ExtResource("3")
+centered = false
+region_enabled = true
+region_rect = Rect2(24, 0, 4, 4)
+
+[node name="RayCast2D" type="RayCast2D" parent="Staff"]
+position = Vector2(8, -28)
+target_position = Vector2(100, 0)
+collision_mask = 16
+
+[connection signal="body_entered" from="LadderChecker" to="." method="_on_LadderChecker_body_entered"]
+[connection signal="body_exited" from="LadderChecker" to="." method="_on_LadderChecker_body_exited"]
