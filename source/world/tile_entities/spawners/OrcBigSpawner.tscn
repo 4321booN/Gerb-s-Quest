@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw7jylwls5oqe"]
+
+[ext_resource type="Script" path="res://source/world/tile_entities/spawners/orc_big_spwaner.gd" id="1_nngco"]
+[ext_resource type="FontFile" uid="uid://qfu1cje1mcmj" path="res://assets/fonts/TinyUnicode.ttf" id="2_cxfco"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_myheh"]
+font = ExtResource("2_cxfco")
+
+[node name="OrcBigSpawner" type="Node2D"]
+script = ExtResource("1_nngco")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -4.0
+offset_top = -9.0
+offset_right = 11.0
+offset_bottom = 4.0
+text = "OB"
+label_settings = SubResource("LabelSettings_myheh")

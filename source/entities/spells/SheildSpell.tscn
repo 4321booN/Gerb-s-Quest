@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://6e6564idru8r"]
+[gd_scene load_steps=12 format=3 uid="uid://6e6564idru8r"]
 
 [ext_resource type="Script" path="res://source/entities/spells/sheild_spell.gd" id="1_c07eo"]
+[ext_resource type="Texture2D" uid="uid://g20lx5umu2yt" path="res://assets/textures/player/spell_spritesheet.png" id="2_bh0uf"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 88.0
@@ -123,6 +124,7 @@ _data = {
 }
 
 [node name="SheildSpell" type="CharacterBody2D"]
+texture_filter = 1
 collision_layer = 128
 collision_mask = 16
 script = ExtResource("1_c07eo")
@@ -130,6 +132,9 @@ script = ExtResource("1_c07eo")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(9.53674e-07, 9.53674e-07)
 scale = Vector2(8, 8)
+texture = ExtResource("2_bh0uf")
+region_enabled = true
+region_rect = Rect2(0, 0, 24, 24)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")

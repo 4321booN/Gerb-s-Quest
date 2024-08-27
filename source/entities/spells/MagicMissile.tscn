@@ -1,11 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://c35mt5gq6n80v"]
+[gd_scene load_steps=5 format=3 uid="uid://c35mt5gq6n80v"]
 
 [ext_resource type="Script" path="res://source/entities/spells/magic_missile.gd" id="1_5ef51"]
 [ext_resource type="Texture2D" uid="uid://g20lx5umu2yt" path="res://assets/textures/player/spell_spritesheet.png" id="1_d7qg6"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
+radius = 31.0
+height = 62.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ipbre"]
 radius = 32.0
-height = 64.0
 
 [node name="MagicMissile" type="CharacterBody2D"]
 texture_filter = 1
@@ -23,3 +26,12 @@ region_rect = Rect2(24, 4, 8, 8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57079
 shape = SubResource("1")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ipbre")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

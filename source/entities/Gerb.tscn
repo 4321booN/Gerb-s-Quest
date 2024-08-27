@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://eweq80phhjvr"]
+[gd_scene load_steps=19 format=3 uid="uid://eweq80phhjvr"]
 
 [ext_resource type="Script" path="res://source/entities/gerb.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://g20lx5umu2yt" path="res://assets/textures/player/spell_spritesheet.png" id="3"]
@@ -80,6 +80,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(16, 64)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_teumn"]
+radius = 16.5161
+height = 65.0
+
 [sub_resource type="Animation" id="4"]
 length = 0.001
 tracks/0/type = "value"
@@ -152,10 +156,10 @@ collision_mask = 64
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LadderChecker"]
 shape = SubResource("1")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, -24)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 scale = Vector2(0.96875, 0.96875)
-polygon = PackedVector2Array(-16.5161, 3.8147e-06, -13.4194, -5.16129, -8.25807, -7.22581, 8.25807, -7.22581, 13.4194, -5.16129, 16.5161, 3.8147e-06, 16.5161, 16.5161, 16.5161, 44.3871, 13.4194, 50.5807, 8.25807, 56.7742, 0, 57.8065, -8.25807, 56.7742, -13.4194, 50.5807, -16.5161, 44.3871, -16.5161, 16.5161)
+shape = SubResource("CapsuleShape2D_teumn")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

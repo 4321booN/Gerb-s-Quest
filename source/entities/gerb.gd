@@ -5,7 +5,7 @@ enum States {AIR=1, FLOOR, LADDER, DEAD, NONE}
 var state: int = States.AIR
 var is_on_ladder: bool = false
 #STAT VARs
-@export var speed: float = 190
+@export var speed: float = 200
 @export var jump_force: float = 3.3
 @export var gravity: int = 25
 @export var stop_speed: float = 0.5
@@ -21,7 +21,7 @@ var invincible: bool = false
 
 @onready var sprite: AnimatedSprite2D = $PlayerSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var hitbox: CollisionPolygon2D = $CollisionPolygon2D
+@onready var hitbox: CollisionShape2D = $CollisionShape2D
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 #READY
 
@@ -68,6 +68,7 @@ func _physics_process(_delta: float) -> void:
 				velocity.x = lerp(velocity.x,0.00,stop_speed)
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = -speed * jump_force
+				Input.action_release("jump")
 				state = States.AIR
 			move_and_fall()
 			cast_magic_missile()
@@ -132,7 +133,7 @@ func cast_magic_missile() -> void:
 		inst.direction = direction
 		get_parent().add_child(inst)
 		inst.position.y = position.y
-		inst.position.x = position.x + 32*direction
+		inst.position.x = position.x + 33*direction
 		Global.mana -= rng.randi_range(1,2)
 		magic_missile_cooldown()
 
@@ -183,7 +184,7 @@ func move_and_fall() -> void:
 
 
 func bounce() -> void:
-	velocity.y -= jump_force*150
+	velocity.y -= jump_force * 200
 
 #DAMAGE
 
@@ -196,8 +197,6 @@ func hurt(enemyposx) -> void:
 			velocity.x = -150
 		elif position.x > enemyposx:
 			velocity.x = 150
-		Input.action_release("walk_l")
-		Input.action_release("walk_r")
 
 
 func _on_Fall_Zone_body_entered(_body) -> void:
@@ -243,3 +242,5 @@ func gameover() -> void:
 	Input.action_release("crouch")
 	sprite.play("idle")
 	await get_tree().create_timer(3.06).timeout
+	$PlayerCam.queue_free()
+	queue_free()

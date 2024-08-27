@@ -1,15 +1,11 @@
 extends Node
 
 
-#PLAYER VARs
 var max_health: int = 3
 var health: int = max_health
 var gems: int = 0
 var mana: int = 0
-
-#GAME VARs
 var level = 1
-var hud
 var staffpowerup = "none"
 
 func _ready():

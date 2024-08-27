@@ -44,7 +44,8 @@ _data = {
 
 [node name="GemButBetter0" type="Area2D"]
 texture_filter = 1
-collision_layer = 0
+scale = Vector2(0.125, 0.125)
+collision_layer = 8
 script = ExtResource("2")
 
 [node name="GemSprite" type="Sprite2D" parent="."]

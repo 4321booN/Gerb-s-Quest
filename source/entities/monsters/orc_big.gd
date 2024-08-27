@@ -3,69 +3,55 @@ extends CharacterBody2D
 @export var gravity: int = 25
 @export var direction: int = -1 #1 = right, -1 = left
 @export var speed: int = 70
-@export var detects_cliffs: bool= true
 @export var health: int = 4
 @onready var floor_checker: RayCast2D = $FloorChecker
+@export var temp: bool
 @onready var sides_checker: Area2D = $SidesChecker
 @onready var top_checker: Area2D = $TopChecker
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: CollisionShape2D = $Hitbox
 @onready var healthbar: ProgressBar = $ProgressBar
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-var amount: int #mana amount
+@onready var progress_bar: ProgressBar = $ProgressBar
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var amount: int = rng.randi_range(3,6) #mana amount
 
 func _ready() -> void:
 	rng.randomize()
-	speed += rng.randi_range(-10,10)
-	amount = rng.randi_range(3,6)
-	if direction == 1:
-		sprite.flip_h = true
-	floor_checker.position.x = (hitbox.shape.size.x)/2 * direction
-	floor_checker.enabled = detects_cliffs
+	sprite.flip_h = direction == 1
 
 func _physics_process(_delta: float) -> void:
-	if is_on_wall() or not floor_checker.is_colliding() and detects_cliffs and is_on_floor():
+	if (is_on_wall() or not floor_checker.is_colliding()):
 		direction = direction * -1
-		sprite.flip_h = not sprite.flip_h
-		floor_checker.position.x = (hitbox.shape.size.x)/2 * direction
-	if health == 0:
-		sprite.play("idle")
-		animation_player.play("healthbar-0%")
-		health = -1
-		speed = 0
-		Global.add_mana(amount)
-		top_checker.set_deferred("monitoring", false)
-		sides_checker.set_deferred("monitoring", false)
-		sprite.play("dissolve")
-		await get_tree().create_timer(1.0).timeout
-		queue_free()
+	progress_bar.value = health
+	floor_checker.position.x = (hitbox.shape.size.x)/2 * direction
+	sprite.flip_h = direction == 1
 	velocity.y += gravity
-	velocity.x = speed*direction
+	velocity.x = speed * direction
 	move_and_slide()
 	if speed > 0:
 		sprite.play("walk")
+	elif health > 0:
+		sprite.play("idle")
+	if health == 0:
+		health = -1
+		speed = 0
+		set_collision_mask_value(1, false)
+		Global.add_mana(amount)
+		sprite.play("dissolve")
+		await get_tree().create_timer(1.0).timeout
+		queue_free()
 
 
 func _on_TopChecker_body_entered(_body):
 	if _body.collision_layer == 1:
 		_body.bounce()
 		health -= 1
-		if health == 3:
-			animation_player.play("healthbar-75%")
-		if health == 2:
-			animation_player.play("healthbar-50%")
-		if health == 1:
-			animation_player.play("healthbar-25%")
 
 func _on_SidesChecker_body_entered(_body):
-	if _body.collision_layer == 1:
+	if _body.collision_layer == 1:         #player collision layer
 		_body.hurt(position.x)
-	elif _body.collision_layer == 32:
+	elif _body.collision_layer == 32:      #spell collision layer
+		print("hit with magic_missile")
 		health -= 2
-		if health == 3:
-			animation_player.play("healthbar-75%")
-		if health == 2:
-			animation_player.play("healthbar-50%")
-		if health == 1:
-			animation_player.play("healthbar-25%")
+		if health == -1:
+			health = 0
