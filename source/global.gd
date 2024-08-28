@@ -7,6 +7,10 @@ var gems: int = 0
 var mana: int = 0
 var level = 1
 var staffpowerup = "none"
+@onready var sheild_cooling_down: bool = false
+@onready var magic_missile_cooling_down: bool = false
+@onready var heal_cooling_down: bool = false
+
 
 func _ready():
 	if level < 1:

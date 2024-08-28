@@ -13,10 +13,7 @@ var is_on_ladder: bool = false
 const MAGIC_MISSILE: PackedScene = preload("res://source/entities/spells/MagicMissile.tscn")
 const SHEILD_SPELL: PackedScene = preload("res://source/entities/spells/SheildSpell.tscn")
 @export var staff_blast_chargeup: float = 0.00
-#COOLDOWN VARs
-var sheild_cooling_down: bool = false
-var magic_missile_cooling_down: bool = false
-var heal_cooling_down: bool = false
+#COOLDOWN VAR
 var invincible: bool = false
 
 @onready var sprite: AnimatedSprite2D = $PlayerSprite
@@ -128,7 +125,7 @@ func _on_LadderChecker_body_exited(_body) -> void:
 
 func cast_magic_missile() -> void:
 	var direction = 1 if sprite.flip_h == false else -1
-	if Global.mana >= 2 and Input.is_action_just_pressed("magic_missile") and not magic_missile_cooling_down:
+	if Global.mana >= 2 and Input.is_action_just_pressed("magic_missile") and not Global.magic_missile_cooling_down:
 		var inst = MAGIC_MISSILE.instantiate()
 		inst.direction = direction
 		get_parent().add_child(inst)
@@ -139,7 +136,7 @@ func cast_magic_missile() -> void:
 
 
 func cast_sheild() -> void:
-	if Global.mana >= 3 and Input.is_action_just_pressed("sheild") and not sheild_cooling_down:
+	if Global.mana >= 3 and Input.is_action_just_pressed("sheild") and not Global.sheild_cooling_down:
 		var sheild = SHEILD_SPELL.instantiate()
 		get_parent().add_child(sheild)
 		sheild.position.y = position.y
@@ -149,32 +146,31 @@ func cast_sheild() -> void:
 
 
 func cast_heal() -> void:
-	if Global.mana >= 4 and Input.is_action_pressed("heal") and not heal_cooling_down and Global.health < 3:
+	if Global.mana >= 4 and Input.is_action_pressed("heal") and not Global.heal_cooling_down and Global.health < 3:
 		Input.action_release("heal")
 		Global.mana -= rng.randi_range(3,4)
 		animation_player.play("heal_spell")
-		await get_tree().create_timer(1).timeout
 		Global.health += 1
 		heal_cooldown()
 
 #SPELL COOLDOWNS
 
 func sheild_cooldown() -> void:
-	sheild_cooling_down = true
+	Global.sheild_cooling_down = true
 	await get_tree().create_timer(10).timeout
-	sheild_cooling_down = false
+	Global.sheild_cooling_down = false
 
 
 func magic_missile_cooldown() -> void:
-	magic_missile_cooling_down = true
+	Global.magic_missile_cooling_down = true
 	await get_tree().create_timer(2).timeout
-	magic_missile_cooling_down = false
+	Global.magic_missile_cooling_down = false
 
 
 func heal_cooldown() -> void:
-	heal_cooling_down = true
+	Global.heal_cooling_down = true
 	await get_tree().create_timer(2).timeout
-	heal_cooling_down = false
+	Global.heal_cooling_down = false
 
 #MOVEMENT
 
