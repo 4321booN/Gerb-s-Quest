@@ -1,11 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0expgispc0lj"]
+[gd_scene load_steps=12 format=3 uid="uid://b0expgispc0lj"]
 
 [ext_resource type="Texture2D" uid="uid://bp4rrs42l041u" path="res://assets/textures/portal.png" id="1"]
 [ext_resource type="Script" path="res://source/entities/features/portal.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://dqjrnxpugv62c" path="res://assets/fonts/Adventurer.ttf" id="3_73sdo"]
+[ext_resource type="FontFile" uid="uid://qfu1cje1mcmj" path="res://assets/fonts/TinyUnicode.ttf" id="4_p7rf4"]
+[ext_resource type="Texture2D" uid="uid://cdtouwxg6iorq" path="res://assets/textures/hud-gui/magic_missile_icon.png" id="5_vjyor"]
+[ext_resource type="Texture2D" uid="uid://ck2ql4asf8rp8" path="res://assets/textures/hud-gui/sheild_icon.png" id="6_a4j88"]
+[ext_resource type="Texture2D" uid="uid://4vonfqvwbep8" path="res://assets/textures/hud-gui/heal_icon.png" id="7_kylki"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 64.0
 height = 256.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_colir"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.129412, 0.14902, 0.180392, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0.262745, 0.247059, 0.32549, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tkgiy"]
+font = ExtResource("3_73sdo")
+font_size = 64
+font_color = Color(0.705882, 0.772549, 0.894118, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h0jtm"]
+font = ExtResource("4_p7rf4")
+font_size = 48
+font_color = Color(0.705882, 0.772549, 0.894118, 1)
 
 [node name="Portal" type="Area2D"]
 texture_filter = 1
@@ -19,4 +46,107 @@ texture = ExtResource("1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("1")
 
-[connection signal="body_entered" from="." to="." method="_on_Portal_body_entered"]
+[node name="UpgradeMenu" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Control" type="Control" parent="UpgradeMenu"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeMenu/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 256
+theme_override_constants/margin_bottom = 128
+
+[node name="PanelContainer" type="PanelContainer" parent="UpgradeMenu/Control/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_colir")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/Control/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pick one:"
+label_settings = SubResource("LabelSettings_tkgiy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Magic Missile"
+label_settings = SubResource("LabelSettings_h0jtm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Upgrade1Button" type="TextureButton" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("5_vjyor")
+stretch_mode = 5
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Sheild"
+label_settings = SubResource("LabelSettings_h0jtm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Upgrade2Button" type="TextureButton" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("6_a4j88")
+stretch_mode = 5
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Heal"
+label_settings = SubResource("LabelSettings_h0jtm")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Upgrade3Button" type="TextureButton" parent="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+texture_normal = ExtResource("7_kylki")
+stretch_mode = 5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="pressed" from="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Upgrade1Button" to="." method="_on_upgrade_1_button_pressed"]
+[connection signal="pressed" from="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2/Upgrade2Button" to="." method="_on_upgrade_2_button_pressed"]
+[connection signal="pressed" from="UpgradeMenu/Control/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3/Upgrade3Button" to="." method="_on_upgrade_3_button_pressed"]

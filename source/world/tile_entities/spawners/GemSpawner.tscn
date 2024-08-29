@@ -13,8 +13,8 @@ script = ExtResource("1_ev88t")
 [node name="Label" type="Label" parent="."]
 texture_filter = 1
 offset_left = -2.0
-offset_top = -9.0
+offset_top = -8.0
 offset_right = 13.0
-offset_bottom = 4.0
+offset_bottom = 5.0
 text = "G"
 label_settings = SubResource("LabelSettings_ppnqu")

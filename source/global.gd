@@ -3,13 +3,20 @@ extends Node
 
 var max_health: int = 3
 var health: int = max_health
-var gems: int = 0
-var mana: int = 0
-var level = 1
+var gems: int = 99
+var mana: int = 99
+var level: int = 1
+var level_pass_multiplier: int = 6
 var staffpowerup = "none"
-@onready var sheild_cooling_down: bool = false
-@onready var magic_missile_cooling_down: bool = false
-@onready var heal_cooling_down: bool = false
+var sheild_cooling_down: bool = false
+var magic_missile_cooling_down: bool = false
+var heal_cooling_down: bool = false
+var sheild_cooldown_time: float = 10.00
+var magic_missile_cooldown_time: float = 2.00
+var heal_cooldown_time: float = 2.00
+var sheild_cost: int = 3
+var magic_missile_cost: int = 0
+var heal_cost: int = 4
 
 
 func _ready():
@@ -36,3 +43,21 @@ func add_gem(gem_type):
 
 func add_mana(amount):
 	mana += amount
+
+
+func sheild_cooldown() -> void:
+	sheild_cooling_down = true
+	await get_tree().create_timer(sheild_cooldown_time).timeout
+	sheild_cooling_down = false
+
+
+func magic_missile_cooldown() -> void:
+	magic_missile_cooling_down = true
+	await get_tree().create_timer(magic_missile_cooldown_time).timeout
+	magic_missile_cooling_down = false
+
+
+func heal_cooldown() -> void:
+	heal_cooling_down = true
+	await get_tree().create_timer(heal_cooldown_time).timeout
+	heal_cooling_down = false

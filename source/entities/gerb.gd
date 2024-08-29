@@ -1,31 +1,25 @@
 extends CharacterBody2D
 
-#STATE VARs
+
 enum States {AIR=1, FLOOR, LADDER, DEAD, NONE}
 var state: int = States.AIR
 var is_on_ladder: bool = false
-#STAT VARs
 @export var speed: float = 200
 @export var jump_force: float = 3.3
 @export var gravity: int = 25
 @export var stop_speed: float = 0.5
-#SPELL VARs
 const MAGIC_MISSILE: PackedScene = preload("res://source/entities/spells/MagicMissile.tscn")
 const SHEILD_SPELL: PackedScene = preload("res://source/entities/spells/SheildSpell.tscn")
-@export var staff_blast_chargeup: float = 0.00
-#COOLDOWN VAR
 var invincible: bool = false
-
 @onready var sprite: AnimatedSprite2D = $PlayerSprite
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-#READY
+
 
 func _ready() -> void:
 	rng.randomize()
 
-#STATE MACHINE
 
 func _physics_process(_delta: float) -> void:
 	match state:
@@ -114,63 +108,45 @@ func should_climb_ladder() -> bool:
 		return false
 
 
-func _on_LadderChecker_body_entered(_body) -> void:
+func _on_LadderChecker_body_entered(_body: Node2D) -> void:
 	is_on_ladder = true
-	
-	
-func _on_LadderChecker_body_exited(_body) -> void:
+
+
+func _on_LadderChecker_body_exited(_body: Node2D) -> void:
 	is_on_ladder = false
 
 #SPELLCASTS
 
-func cast_magic_missile() -> void:
-	var direction = 1 if sprite.flip_h == false else -1
-	if Global.mana >= 2 and Input.is_action_just_pressed("magic_missile") and not Global.magic_missile_cooling_down:
-		var inst = MAGIC_MISSILE.instantiate()
-		inst.direction = direction
-		get_parent().add_child(inst)
-		inst.position.y = position.y
-		inst.position.x = position.x + 33*direction
-		Global.mana -= rng.randi_range(1,2)
-		magic_missile_cooldown()
-
 
 func cast_sheild() -> void:
-	if Global.mana >= 3 and Input.is_action_just_pressed("sheild") and not Global.sheild_cooling_down:
+	if Global.mana >= Global.sheild_cost and Input.is_action_just_pressed("sheild") and not Global.sheild_cooling_down:
 		var sheild = SHEILD_SPELL.instantiate()
 		get_parent().add_child(sheild)
 		sheild.position.y = position.y
 		sheild.position.x = position.x
-		Global.mana -= rng.randi_range(1,3)
-		sheild_cooldown()
+		Global.mana -= rng.randi_range(clampi(Global.sheild_cost - 2, 0, 1000000000000000000),Global.sheild_cost)
+		Global.sheild_cooldown()
+
+
+func cast_magic_missile() -> void:
+	if Global.mana >= Global.magic_missile_cost and Input.is_action_just_pressed("magic_missile") and not Global.magic_missile_cooling_down:
+		var direction = 1 if sprite.flip_h == false else -1
+		var inst = MAGIC_MISSILE.instantiate()
+		inst.direction = direction
+		get_parent().add_child(inst)
+		inst.position.y = position.y - 2
+		inst.position.x = position.x + 33*direction
+		Global.mana -= rng.randi_range(clampi(Global.magic_missile_cost - 2, 0, 1000000000000000000),Global.magic_missile_cost)
+		Global.magic_missile_cooldown()
 
 
 func cast_heal() -> void:
-	if Global.mana >= 4 and Input.is_action_pressed("heal") and not Global.heal_cooling_down and Global.health < 3:
+	if Global.mana >= Global.heal_cost and Input.is_action_pressed("heal") and not Global.heal_cooling_down and Global.health < 3:
 		Input.action_release("heal")
-		Global.mana -= rng.randi_range(3,4)
+		Global.mana -= rng.randi_range(clampi(Global.heal_cost - 2, 0, 1000000000000000000),Global.heal_cost)
 		animation_player.play("heal_spell")
 		Global.health += 1
-		heal_cooldown()
-
-#SPELL COOLDOWNS
-
-func sheild_cooldown() -> void:
-	Global.sheild_cooling_down = true
-	await get_tree().create_timer(10).timeout
-	Global.sheild_cooling_down = false
-
-
-func magic_missile_cooldown() -> void:
-	Global.magic_missile_cooling_down = true
-	await get_tree().create_timer(2).timeout
-	Global.magic_missile_cooling_down = false
-
-
-func heal_cooldown() -> void:
-	Global.heal_cooling_down = true
-	await get_tree().create_timer(2).timeout
-	Global.heal_cooling_down = false
+		Global.heal_cooldown()
 
 #MOVEMENT
 
