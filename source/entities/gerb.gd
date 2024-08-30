@@ -133,9 +133,9 @@ func cast_magic_missile() -> void:
 		var direction = 1 if sprite.flip_h == false else -1
 		var inst = MAGIC_MISSILE.instantiate()
 		inst.direction = direction
-		get_parent().add_child(inst)
 		inst.position.y = position.y - 2
 		inst.position.x = position.x + 33*direction
+		get_parent().add_child(inst)
 		Global.mana -= rng.randi_range(clampi(Global.magic_missile_cost - 2, 0, 1000000000000000000),Global.magic_missile_cost)
 		Global.magic_missile_cooldown()
 

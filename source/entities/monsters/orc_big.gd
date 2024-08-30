@@ -42,16 +42,18 @@ func _physics_process(_delta: float) -> void:
 		queue_free()
 
 
-func _on_TopChecker_body_entered(_body):
+func _on_TopChecker_body_entered(_body: Node2D):
 	if _body.collision_layer == 1:
 		_body.bounce()
 		health -= 1
 
-func _on_SidesChecker_body_entered(_body):
-	if _body.collision_layer == 1:         #player collision layer
+
+func _on_SidesChecker_body_entered(_body: Node2D):
+	if _body.collision_layer == 1:
 		_body.hurt(position.x)
-	elif _body.collision_layer == 32:      #spell collision layer
-		print("hit with magic_missile")
+	elif _body.collision_layer == 32:
+		print("hit with magic_missile:")
+		prints("my pos:",global_position,", its pos:",_body.global_position)
 		health -= 2
 		if health == -1:
 			health = 0
