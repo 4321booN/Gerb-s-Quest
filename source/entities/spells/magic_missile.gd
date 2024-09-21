@@ -18,5 +18,4 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
-	print("collided")
 	queue_free()

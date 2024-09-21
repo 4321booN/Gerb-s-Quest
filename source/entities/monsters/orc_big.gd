@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var speed: int = 70
 @export var health: int = 4
 @onready var floor_checker: RayCast2D = $FloorChecker
-@export var temp: bool
+@onready var in_floor_checker: RayCast2D = $InFloorChecker
 @onready var sides_checker: Area2D = $SidesChecker
 @onready var top_checker: Area2D = $TopChecker
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -38,22 +38,26 @@ func _physics_process(_delta: float) -> void:
 		set_collision_mask_value(1, false)
 		Global.add_mana(amount)
 		sprite.play("dissolve")
+		Audio.sfx("enemy_die")
 		await get_tree().create_timer(1.0).timeout
 		queue_free()
+	if in_floor_checker.is_colliding():
+		position.y -= 8
 
 
 func _on_TopChecker_body_entered(_body: Node2D):
 	if _body.collision_layer == 1:
 		_body.bounce()
+		Audio.sfx("enemy_damage")
 		health -= 1
 
 
 func _on_SidesChecker_body_entered(_body: Node2D):
 	if _body.collision_layer == 1:
 		_body.hurt(position.x)
+		Audio.sfx("enemy_damage")
 	elif _body.collision_layer == 32:
-		print("hit with magic_missile:")
-		prints("my pos:",global_position,", its pos:",_body.global_position)
 		health -= 2
+		Audio.sfx("enemy_damage")
 		if health == -1:
 			health = 0

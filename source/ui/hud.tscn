@@ -289,6 +289,7 @@ _data = {
 }
 
 [node name="HUD" type="CanvasLayer"]
+visible = false
 script = ExtResource("1_emfj7")
 
 [node name="TextureRect" type="TextureRect" parent="."]

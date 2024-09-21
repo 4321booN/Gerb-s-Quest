@@ -1,0 +1,59 @@
+[gd_scene load_steps=14 format=3 uid="uid://bo5ss6tm2h22a"]
+
+[ext_resource type="Script" path="res://source/audio.gd" id="1_5yiuw"]
+[ext_resource type="AudioStream" uid="uid://dgdnviwyp4u2x" path="res://assets/sounds/fx/button.wav" id="2_vl57p"]
+[ext_resource type="AudioStream" uid="uid://beyyk3knxs8vh" path="res://assets/sounds/fx/damage.wav" id="3_77mxi"]
+[ext_resource type="AudioStream" uid="uid://wel65ij1t5me" path="res://assets/sounds/fx/enemy_die.wav" id="4_t52k0"]
+[ext_resource type="AudioStream" uid="uid://d0rq6cojlse54" path="res://assets/sounds/fx/enemy_damage.wav" id="5_hgcg6"]
+[ext_resource type="AudioStream" uid="uid://cd77ggu6g0vrb" path="res://assets/sounds/fx/heal.wav" id="5_v3e72"]
+[ext_resource type="AudioStream" uid="uid://dtcv2ied26bfx" path="res://assets/sounds/fx/jump.wav" id="6_vfmcx"]
+[ext_resource type="AudioStream" uid="uid://cdl1y5drykjbi" path="res://assets/sounds/fx/magic_missle.wav" id="7_kmesd"]
+[ext_resource type="AudioStream" uid="uid://dvdhlfmwjwap" path="res://assets/sounds/fx/pickup_gem.wav" id="8_ktwru"]
+[ext_resource type="AudioStream" uid="uid://bsh1toykydo7j" path="res://assets/sounds/fx/powerup.wav" id="9_ja44p"]
+[ext_resource type="AudioStream" uid="uid://byiyghvrubnvq" path="res://assets/sounds/fx/sheild.wav" id="10_30xjl"]
+[ext_resource type="AudioStream" uid="uid://bc1b1yp0ykvh0" path="res://assets/sounds/music/8-bit-adventure_fesliyan-studios-bagckground-music.ogg" id="11_x8616"]
+[ext_resource type="AudioStream" uid="uid://bnl7yc6n7jjw0" path="res://assets/sounds/music/8-bit-nostalgia_fesliyan-studios-bagckground-music.ogg" id="12_lklgn"]
+
+[node name="Audio" type="Node"]
+script = ExtResource("1_5yiuw")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Button" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("2_vl57p")
+
+[node name="Damage" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_77mxi")
+
+[node name="EnemyDie" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_t52k0")
+
+[node name="EnemyDamage" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_hgcg6")
+
+[node name="Heal" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_v3e72")
+volume_db = -10.7
+
+[node name="Jump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("6_vfmcx")
+
+[node name="MagicMissile" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_kmesd")
+
+[node name="PickupGem" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_ktwru")
+
+[node name="Powerup" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("9_ja44p")
+
+[node name="Sheild" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("10_30xjl")
+
+[node name="Music" type="Node" parent="."]
+
+[node name="8BitAdventure" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("11_x8616")
+
+[node name="8BitNostalgia" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("12_lklgn")

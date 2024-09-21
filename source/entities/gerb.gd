@@ -58,6 +58,7 @@ func _physics_process(_delta: float) -> void:
 				sprite.play("idle")
 				velocity.x = lerp(velocity.x,0.00,stop_speed)
 			if Input.is_action_just_pressed("jump"):
+				Audio.sfx("jump")
 				velocity.y = -speed * jump_force
 				Input.action_release("jump")
 				state = States.AIR
@@ -120,6 +121,7 @@ func _on_LadderChecker_body_exited(_body: Node2D) -> void:
 
 func cast_sheild() -> void:
 	if Global.mana >= Global.sheild_cost and Input.is_action_just_pressed("sheild") and not Global.sheild_cooling_down:
+		Audio.sfx("sheild")
 		var sheild = SHEILD_SPELL.instantiate()
 		get_parent().add_child(sheild)
 		sheild.position.y = position.y
@@ -130,6 +132,7 @@ func cast_sheild() -> void:
 
 func cast_magic_missile() -> void:
 	if Global.mana >= Global.magic_missile_cost and Input.is_action_just_pressed("magic_missile") and not Global.magic_missile_cooling_down:
+		Audio.sfx("magic_missile")
 		var direction = 1 if sprite.flip_h == false else -1
 		var inst = MAGIC_MISSILE.instantiate()
 		inst.direction = direction
@@ -142,6 +145,7 @@ func cast_magic_missile() -> void:
 
 func cast_heal() -> void:
 	if Global.mana >= Global.heal_cost and Input.is_action_pressed("heal") and not Global.heal_cooling_down and Global.health < 3:
+		Audio.sfx("heal")
 		Input.action_release("heal")
 		Global.mana -= rng.randi_range(clampi(Global.heal_cost - 2, 0, 1000000000000000000),Global.heal_cost)
 		animation_player.play("heal_spell")
@@ -156,6 +160,7 @@ func move_and_fall() -> void:
 
 
 func bounce() -> void:
+	Audio.sfx("jump")
 	velocity.y -= jump_force * 200
 
 #DAMAGE
@@ -191,6 +196,7 @@ func spiked() -> void:
 
 
 func damage_cooldown() -> void:
+	Audio.sfx("damage")
 	invincible = true
 	set_modulate(Color(0.65,0.3,0.3,0.5))
 	await get_tree().create_timer(.5).timeout

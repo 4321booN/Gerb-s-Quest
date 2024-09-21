@@ -6,6 +6,7 @@ extends Area2D
 func _on_GemButBetter1_body_entered(_body):
 	animation_player.play("collect_bounce")
 	Global.add_gem("gem_but_better")
+	Audio.sfx("pickup_gem")
 	set_deferred("monitoring", false)
 
 
