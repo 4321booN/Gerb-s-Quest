@@ -1,8 +1,9 @@
 extends CanvasLayer
 
-@onready var sprite: AnimatedSprite2D = $PanelContainer2/VBoxContainer/HBoxContainer/AnimatedSprite2D
-@onready var label: Label = $PanelContainer2/VBoxContainer/HBoxContainer2/Label
-@onready var label_2: Label = $PanelContainer2/VBoxContainer/HBoxContainer2/Label2
+@onready var sprite: AnimatedSprite2D = $PanelContainer0/VBoxContainer/HBoxContainer/AnimatedSprite2D
+@onready var label: Label = $PanelContainer0/VBoxContainer/HBoxContainer2/Label
+@onready var texture_button: TextureButton = $PanelContainer1/TextureButton
+@onready var label_2: Label = $PanelContainer0/VBoxContainer/HBoxContainer2/Label2
 @onready var anim_magic_missile: AnimationPlayer = $AnimationPlayer
 @onready var anim_sheild: AnimationPlayer = $AnimationPlayer2
 @onready var anim_heal: AnimationPlayer = $AnimationPlayer3
@@ -19,3 +20,5 @@ func _process(_delta: float) -> void:
 		anim_sheild.play("sheild")
 	if Global.heal_cooling_down and not anim_heal.is_playing() and not Global.mana == 0:
 		anim_heal.play("heal")
+	Audio.muted = texture_button.button_pressed
+

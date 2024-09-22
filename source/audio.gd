@@ -16,12 +16,30 @@ extends Node
 	'8_bit_adventure':$"Music/8BitAdventure",
 	'8_bit_nostalgia':$"Music/8BitNostalgia"
 }
+var muted: bool = false
+
+
+func _process(_delta: float) -> void:
+	if muted:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
+
 
 func music(track: String) -> void:
 	if _music.has(track):
 		_music[track].play()
 	else:
 		printerr("Could not find track: "+track+" in _music.")
+
+
+func is_music_playing() -> bool:
+	for i in _music:
+		if _music[i].playing:
+			return true
+		else:
+			return false
+	return false
 
 
 func sfx(sound: String) -> void:

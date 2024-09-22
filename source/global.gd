@@ -6,6 +6,7 @@ var health: int = max_health
 var gems: int = 99
 var mana: int = 99
 var level: int = 1
+var popup_open: bool = false
 var level_pass_multiplier: int = 6
 var staffpowerup = "none"
 var sheild_cooling_down: bool = false
@@ -20,6 +21,7 @@ var heal_cost: int = 4
 
 
 func _ready():
+	Audio.muted = false
 	if level < 1:
 		level = 1
 	health = max_health

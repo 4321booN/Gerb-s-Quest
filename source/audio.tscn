@@ -54,6 +54,8 @@ stream = ExtResource("10_30xjl")
 
 [node name="8BitAdventure" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("11_x8616")
+volume_db = -12.187
 
 [node name="8BitNostalgia" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("12_lklgn")
+volume_db = -12.187

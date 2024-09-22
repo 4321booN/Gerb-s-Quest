@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ctftbaghfw4g3"]
+[gd_scene load_steps=36 format=3 uid="uid://ctftbaghfw4g3"]
 
 [ext_resource type="Script" path="res://source/ui/HUD.gd" id="1_emfj7"]
 [ext_resource type="Texture2D" uid="uid://cqhtanths07o5" path="res://assets/textures/player/vignette.png" id="2_gji3v"]
@@ -9,8 +9,14 @@
 [ext_resource type="Texture2D" uid="uid://cdtouwxg6iorq" path="res://assets/textures/hud-gui/magic_missile_icon.png" id="7_pkyt8"]
 [ext_resource type="Texture2D" uid="uid://ck2ql4asf8rp8" path="res://assets/textures/hud-gui/sheild_icon.png" id="8_nw2ur"]
 [ext_resource type="Texture2D" uid="uid://4vonfqvwbep8" path="res://assets/textures/hud-gui/heal_icon.png" id="9_ykc6n"]
+[ext_resource type="Texture2D" uid="uid://b6db825dxxu2x" path="res://assets/textures/hud-gui/unmute.png" id="10_7ipc4"]
+[ext_resource type="Texture2D" uid="uid://3gpjhx7ec7sx" path="res://assets/textures/hud-gui/mute.png" id="11_7j246"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkm7t"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
 bg_color = Color(0.356863, 0.266667, 0.419608, 0.65098)
 border_width_left = 8
 border_width_top = 8
@@ -97,7 +103,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar:value")
+tracks/0/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -113,7 +119,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar:value")
+tracks/0/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -134,7 +140,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar2:value")
+tracks/0/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar2:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -150,7 +156,7 @@ length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar2:value")
+tracks/0/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar2:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -171,7 +177,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar3:value")
+tracks/0/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar3:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -187,7 +193,7 @@ length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar3:value")
+tracks/0/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar3:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -208,7 +214,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar:value")
+tracks/0/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -220,7 +226,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar2:value")
+tracks/1/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar2:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -232,7 +238,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar3:value")
+tracks/2/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar3:value")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -248,7 +254,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar:value")
+tracks/0/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -260,7 +266,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar2:value")
+tracks/1/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar2:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -272,7 +278,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PanelContainer2/VBoxContainer/HBoxContainer3/ProgressBar3:value")
+tracks/2/path = NodePath("PanelContainer0/VBoxContainer/HBoxContainer3/ProgressBar3:value")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -300,7 +306,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_gji3v")
 
-[node name="PanelContainer2" type="PanelContainer" parent="."]
+[node name="PanelContainer0" type="PanelContainer" parent="."]
 texture_filter = 1
 offset_left = 24.0
 offset_top = 24.0
@@ -308,14 +314,14 @@ offset_right = 424.0
 offset_bottom = 256.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pkm7t")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer0"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer0/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer0/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -323,23 +329,23 @@ text = "	HP:"
 label_settings = SubResource("LabelSettings_d1gf2")
 vertical_alignment = 1
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer0/VBoxContainer/HBoxContainer"]
 position = Vector2(240, 32)
 scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_84cyt")
 animation = &"2"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer0/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer0/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("5_i4dy6")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="PanelContainer0/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -347,14 +353,14 @@ text = "##"
 label_settings = SubResource("LabelSettings_fl7rj")
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer2/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer0/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 texture = ExtResource("6_b4txd")
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="PanelContainer2/VBoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="PanelContainer0/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
@@ -362,22 +368,22 @@ text = "##"
 label_settings = SubResource("LabelSettings_1cjj7")
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer0/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 8
 
-[node name="VSeparator2" type="VSeparator" parent="PanelContainer2/VBoxContainer/HBoxContainer3"]
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer0/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_tq06d")
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer0/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("7_pkyt8")
 stretch_mode = 5
 
-[node name="ProgressBar" type="ProgressBar" parent="PanelContainer2/VBoxContainer/HBoxContainer3"]
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer0/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -386,13 +392,13 @@ theme_override_styles/background = SubResource("StyleBoxFlat_3mjyi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_doarh")
 show_percentage = false
 
-[node name="TextureRect2" type="TextureRect" parent="PanelContainer2/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer0/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("8_nw2ur")
 stretch_mode = 5
 
-[node name="ProgressBar2" type="ProgressBar" parent="PanelContainer2/VBoxContainer/HBoxContainer3"]
+[node name="ProgressBar2" type="ProgressBar" parent="PanelContainer0/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -401,13 +407,13 @@ theme_override_styles/background = SubResource("StyleBoxFlat_3mjyi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_doarh")
 show_percentage = false
 
-[node name="TextureRect3" type="TextureRect" parent="PanelContainer2/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect3" type="TextureRect" parent="PanelContainer0/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("9_ykc6n")
 stretch_mode = 5
 
-[node name="ProgressBar3" type="ProgressBar" parent="PanelContainer2/VBoxContainer/HBoxContainer3"]
+[node name="ProgressBar3" type="ProgressBar" parent="PanelContainer0/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -416,9 +422,26 @@ theme_override_styles/background = SubResource("StyleBoxFlat_3mjyi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_doarh")
 show_percentage = false
 
-[node name="VSeparator" type="VSeparator" parent="PanelContainer2/VBoxContainer/HBoxContainer3"]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer0/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_tq06d")
+
+[node name="PanelContainer1" type="PanelContainer" parent="."]
+texture_filter = 1
+offset_left = 1000.0
+offset_top = 24.0
+offset_right = 1128.0
+offset_bottom = 152.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pkm7t")
+
+[node name="TextureButton" type="TextureButton" parent="PanelContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+toggle_mode = true
+texture_normal = ExtResource("10_7ipc4")
+texture_pressed = ExtResource("11_7j246")
+texture_disabled = ExtResource("11_7j246")
+stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
