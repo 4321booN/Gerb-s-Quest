@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://ctftbaghfw4g3"]
+[gd_scene load_steps=40 format=3 uid="uid://ctftbaghfw4g3"]
 
 [ext_resource type="Script" path="res://source/ui/HUD.gd" id="1_emfj7"]
 [ext_resource type="Texture2D" uid="uid://cqhtanths07o5" path="res://assets/textures/player/vignette.png" id="2_gji3v"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://4vonfqvwbep8" path="res://assets/textures/hud-gui/heal_icon.png" id="9_ykc6n"]
 [ext_resource type="Texture2D" uid="uid://b6db825dxxu2x" path="res://assets/textures/hud-gui/unmute.png" id="10_7ipc4"]
 [ext_resource type="Texture2D" uid="uid://3gpjhx7ec7sx" path="res://assets/textures/hud-gui/mute.png" id="11_7j246"]
+[ext_resource type="Texture2D" uid="uid://c53im26eayl2m" path="res://assets/textures/hud-gui/grabber.png" id="12_nbgei"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkm7t"]
 content_margin_left = 24.0
@@ -97,6 +98,22 @@ bg_color = Color(0.262745, 0.247059, 0.32549, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_doarh"]
 bg_color = Color(1, 0.788235, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8v5d"]
+bg_color = Color(0.432833, 0.2968, 0.53, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_i4yih"]
+color = Color(0.203922, 0.160784, 0.294118, 1)
+thickness = 10
+
+[sub_resource type="Theme" id="Theme_efqxe"]
+HSlider/icons/grabber = ExtResource("12_nbgei")
+HSlider/icons/grabber_disabled = ExtResource("12_nbgei")
+HSlider/icons/grabber_highlight = ExtResource("12_nbgei")
+HSlider/icons/tick = ExtResource("12_nbgei")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_k8v5d")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_k8v5d")
+HSlider/styles/slider = SubResource("StyleBoxLine_i4yih")
 
 [sub_resource type="Animation" id="Animation_mc32l"]
 length = 0.001
@@ -431,10 +448,13 @@ texture_filter = 1
 offset_left = 1000.0
 offset_top = 24.0
 offset_right = 1128.0
-offset_bottom = 152.0
+offset_bottom = 176.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pkm7t")
 
-[node name="TextureButton" type="TextureButton" parent="PanelContainer1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer1"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="PanelContainer1/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 toggle_mode = true
@@ -442,6 +462,13 @@ texture_normal = ExtResource("10_7ipc4")
 texture_pressed = ExtResource("11_7j246")
 texture_disabled = ExtResource("11_7j246")
 stretch_mode = 5
+
+[node name="HSlider" type="HSlider" parent="PanelContainer1/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_efqxe")
+max_value = 1.0
+step = 0.01
+value = 0.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -465,3 +492,6 @@ autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_e85b2")
 }
+
+[connection signal="toggled" from="PanelContainer1/VBoxContainer/TextureButton" to="." method="_on_texture_button_toggled"]
+[connection signal="value_changed" from="PanelContainer1/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

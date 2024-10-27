@@ -2,7 +2,8 @@ extends CanvasLayer
 
 @onready var sprite: AnimatedSprite2D = $PanelContainer0/VBoxContainer/HBoxContainer/AnimatedSprite2D
 @onready var label: Label = $PanelContainer0/VBoxContainer/HBoxContainer2/Label
-@onready var texture_button: TextureButton = $PanelContainer1/TextureButton
+@onready var texture_button: TextureButton = $PanelContainer1/VBoxContainer/TextureButton
+@onready var slider: HSlider = $PanelContainer1/VBoxContainer/HSlider
 @onready var label_2: Label = $PanelContainer0/VBoxContainer/HBoxContainer2/Label2
 @onready var anim_magic_missile: AnimationPlayer = $AnimationPlayer
 @onready var anim_sheild: AnimationPlayer = $AnimationPlayer2
@@ -11,6 +12,7 @@ extends CanvasLayer
 
 
 func _process(_delta: float) -> void:
+	Audio.volume = slider.value
 	sprite.play(str(Global.health))
 	label.text = str(Global.gems)
 	label_2.text = str(Global.mana)
@@ -22,3 +24,14 @@ func _process(_delta: float) -> void:
 		anim_heal.play("heal")
 	Audio.muted = texture_button.button_pressed
 
+
+func _on_h_slider_value_changed(value: float) -> void:
+	if value == 0:
+		texture_button.set_pressed_no_signal(true)
+	else:
+		texture_button.set_pressed_no_signal(false)
+
+
+func _on_texture_button_toggled(toggled_on: bool) -> void:
+	if not toggled_on:
+		slider.value = 0.5

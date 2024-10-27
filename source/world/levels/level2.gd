@@ -5,7 +5,7 @@ extends Node2D
 
 func _ready() -> void:
 	rng.randomize()
-	Global.level = 1
+	Global.level = 2
 	HUD.show()
 
 

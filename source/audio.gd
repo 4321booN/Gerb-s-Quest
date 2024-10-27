@@ -1,5 +1,6 @@
 extends Node
 
+@onready var volume: float = 100.00
 @onready var _sfx: Dictionary = {
 	"button":$SFX/Button,
 	'damage':$SFX/Damage,
@@ -20,6 +21,7 @@ var muted: bool = false
 
 
 func _process(_delta: float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(volume))
 	if muted:
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
 	else:

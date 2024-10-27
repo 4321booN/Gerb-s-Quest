@@ -1,13 +1,16 @@
 extends Node2D
 
-func _ready():
+@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+
+func _ready() -> void:
+	rng.randomize()
 	Global.level = 1
 	HUD.show()
 
 
-func play_level_music():
-	pass
-
-
-func _process(_delta):
-	play_level_music()
+func _process(_delta: float) -> void:
+	if bool(rng.randi_range(0,1)) and not Audio.is_music_playing():
+		Audio.music("8_bit_adventure")
+	else:
+		Audio.music("8_bit_nostalgia")
